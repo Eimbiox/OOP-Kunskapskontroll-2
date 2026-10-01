@@ -81,6 +81,10 @@ class ShoppingList
     
     public void Load()
     {
+        if (!File.Exists(path))     //Checks if the file of the path(items.txt) exits. If not the program continues to run. (Save creates the missing file)
+        {
+            return;
+        }
         string[] lines = File.ReadAllLines(path);   //Reads all lines in path, ReadAllLines fixes the issue where \r is left after the split and it does not create and extra empty line
         foreach (string line in lines)          
         {
@@ -92,7 +96,7 @@ class ShoppingList
             items.Add(new Item(parts[1], int.Parse(parts[0])));     //To the items list you add a new object item with part[1](name) and parse the part[0] to an int. 
         }
     }
-    public int Count()
+    public int Count()  //Returns the ammount of items in the list. 
     {
         return items.Count;
     }

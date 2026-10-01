@@ -15,7 +15,9 @@ Man får även en extra \r på slutet som man behöver ta bort
 
 6. Programmet crashar om man inte väljer en av dem 5 alternativen i menyn   
 
-7.
+7. Programmet skriver inte ut om varan hittades eller inte när man söker efter den  
+
+8. Programmet crashar om den inte hittar filen (items.txt)
 ### Fix:
 1. Ändra ReadAllText => ReadAllLines som automatiskt tar bort \r i slutet och skapar inte en extra tom line.   
 Lägger till en if som kollar om det finns en tom line i txt. Om det finns blir den ignorerad.   
@@ -30,5 +32,13 @@ Lägger till en if som kollar om det finns en tom line i txt. Om det finns blir 
 
 6. Fixat genom att lägga en if innan meny valen som kollar att man väljer en av de 5 alternativen.  
 
-7. 
+7. Fixat genom att lägga till Console.ReadKey() efter utskriften   
+
+8. Fixat genom att lägga till File.Exists(path) i load. Den kollar om det finns en fil vid det namnet i path och returnerar en boolean. 
+
+Om den är true så går den vidare eftersom !true blir false och kör resten av koden. Om den är false så kommer den gå in i if och bara gå ut från metoden. Då har man en tom lista där man kan forfarande lägga till grejer.     
+
+Om man sedan sparar listan så skapas det en ny items.txt automatiskt. Detta är eftersom File.WriteAllText kollar om det finns en fil vid det namnet. Om det inte finns så skapar den det automatiskt och skriver i den. 
+
+Om filen finns så rensar den allt i filen och skriver om det.
 

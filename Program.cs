@@ -42,6 +42,22 @@ void RemoveItem()   //Removes an item from the list.
     }
     
 }
+void SearchItem()   //Searches for an item in the list.
+{
+    string wanted = ReadString("Namn att söka efter: ");
+            Item found = list.Find(wanted);
+
+            if (found == null)
+            {
+                Console.WriteLine("Varan finns inte i listan.");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine($"Hittade: {found}");
+                Console.ReadKey();
+            }
+}
 while (true)
 {
     Console.Clear();
@@ -72,21 +88,11 @@ while (true)
         else if (choice == 3)
         {
             list.Save();
+            Console.ReadKey();
         }
         else if (choice == 4)
         {
-            Console.Write("Namn att söka efter: ");
-            string wanted = Console.ReadLine();
-            Item found = list.Find(wanted);
-
-        if (found == null)
-        {
-            Console.WriteLine("Varan finns inte i listan.");
-        }
-        else
-        {
-            Console.WriteLine($"Hittade: {found}");
-        }
+            SearchItem();
         }
         else if (choice == 5)
         {
