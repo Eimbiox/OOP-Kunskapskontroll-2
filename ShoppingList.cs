@@ -3,15 +3,29 @@ class ShoppingList
 {
     private List<Item> items = new List<Item>();
     private string path;
+    private int _buget;
+    public int Buget
+    {
+        get {return _buget;}
+        set
+        {
+            if (value <= 0 || value > 10000)
+            {
+                throw new ArgumentOutOfRangeException(nameof(Buget), "Value can not be negative, zero or above 10 000");
+            }
+            _buget = value;
+        }
+    }
 
-    public ShoppingList(string path)
+    public ShoppingList(string path, int budget)
     {
         this.path = path;
+        this.Buget = budget;
     }
 
     public void Add(Item item)
     {
-        items.Add(item);
+        items.Add(item);     
     }
 
     // Removes the item the user sees as number 1, 2, 3 ...

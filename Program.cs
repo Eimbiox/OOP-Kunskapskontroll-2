@@ -1,5 +1,6 @@
 ShoppingList list = new ShoppingList("items.txt");
 list.Load();
+
 string ReadString(string promt)     //Prints promt and reads a string that is not empty
 {
     Console.WriteLine(promt);
@@ -11,6 +12,7 @@ string ReadString(string promt)     //Prints promt and reads a string that is no
     }
     return temp;
 }
+
 int ReadNotNegativeInt(string promt)    //Prints promt and reads and int thats is not negative.
 {
     Console.WriteLine(promt);
@@ -21,6 +23,7 @@ int ReadNotNegativeInt(string promt)    //Prints promt and reads and int thats i
     }
     return num;
 }
+
 void AddItem()  //Uses the helpers and adds the item to the shopping list.
 
 {
@@ -39,6 +42,7 @@ void AddItem()  //Uses the helpers and adds the item to the shopping list.
         Console.WriteLine("FEL" + e.Message);
     }
 }
+
 void RemoveItem()   //Removes an item from the list.
 {
     int number = ReadNotNegativeInt("Nummer: ");
@@ -53,6 +57,7 @@ void RemoveItem()   //Removes an item from the list.
     }
     
 }
+
 void SearchItem()   //Searches for an item in the list.
 {
     string wanted = ReadString("Namn att söka efter: ");
@@ -69,6 +74,7 @@ void SearchItem()   //Searches for an item in the list.
                 Console.ReadKey();
             }
 }
+
 
 while (true)
 {
