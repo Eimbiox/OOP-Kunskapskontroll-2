@@ -46,3 +46,5 @@ Om filen finns så rensar den allt i filen och skriver om det.
 
 9. Fixat genom att lägga till 2 catch under try i save metoden. Den fångar upp om man inte har access till filen eller om något annat går som tex full hårdisk. Den skriver ut errorsen till användaren
 
+### Item skyddar sig själv. 
+Jag valde att skriva item skyddet i set på egenskaperna eftersom om man skriver dem i konstruktorn så finns det inget som stoppar item att ändra värden efter objektet redan finns. Med set spelar det ingen roll om item existerar eller inte den kan aldrig få fel värden.

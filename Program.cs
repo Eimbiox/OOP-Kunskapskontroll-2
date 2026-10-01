@@ -26,7 +26,18 @@ void AddItem()  //Uses the helpers and adds the item to the shopping list.
 {
     string name = ReadString("Skriv namnet på varan");
     int price = ReadNotNegativeInt("Skriv priset på varan");
-    list.Add(new Item(name, price));
+    try
+    {
+        list.Add(new Item(name, price));
+    }
+    catch (ArgumentOutOfRangeException e)
+    {
+        Console.WriteLine("FEL" + e.Message);
+    }
+    catch (ArgumentException e)
+    {
+        Console.WriteLine("FEL" + e.Message);
+    }
 }
 void RemoveItem()   //Removes an item from the list.
 {
@@ -58,6 +69,7 @@ void SearchItem()   //Searches for an item in the list.
                 Console.ReadKey();
             }
 }
+
 while (true)
 {
     Console.Clear();

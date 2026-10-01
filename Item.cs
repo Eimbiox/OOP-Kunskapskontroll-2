@@ -1,8 +1,32 @@
 // One item on the shopping list.
 class Item
 {
-    public string Name { get; set; }
-    public int Price { get; set; }
+    private string _name;
+    public string Name
+    {
+        get {return _name;}
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("Value can not be null");
+            }
+            _name = value;
+        }
+    }
+    private int _price;
+    public int Price
+    {
+        get {return _price;}
+        set
+        {
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(Price), "Value can not be below 0");
+            }
+            _price = value;
+        }
+    }
 
     public Item(string name, int price)
     {
