@@ -1,8 +1,37 @@
 ShoppingList list = new ShoppingList("items.txt");
 list.Load();
-
+string ReadString(string promt)
+{
+    Console.WriteLine(promt);
+    string temp = Console.ReadLine();
+    while (string.IsNullOrEmpty(temp))
+    {
+        Console.Clear();
+        Console.WriteLine($"Skriv namnet på varan: ");
+        temp = Console.ReadLine();
+    }
+    return temp;
+}
+int ReadNotNegativeInt(string promt)
+{
+    Console.WriteLine(promt);
+    int num;
+    while(!int.TryParse(Console.ReadLine(), out num) || num < 0)
+    {
+        Console.Clear();
+        Console.WriteLine("Skriv ett heltal som inte är negativt");
+    }
+    return num;
+}
+void AddItem()
+{
+    string name = ReadString("Skriv namnet på varan");
+    int price = ReadNotNegativeInt("Skriv priset på varan");
+    list.Add(new Item(name, price));
+}
 while (true)
 {
+    Console.Clear();
     Console.WriteLine();
     list.Print();
     Console.WriteLine();
@@ -17,11 +46,7 @@ while (true)
 
     if (choice == 1)
     {
-        Console.Write("Namn: ");
-        string name = Console.ReadLine();
-        Console.Write("Pris: ");
-        int price = int.Parse(Console.ReadLine());
-        list.Add(new Item(name, price));
+        AddItem();
     }
     else if (choice == 2)
     {

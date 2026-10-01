@@ -7,12 +7,17 @@ Man får även en extra \r på slutet som man behöver ta bort
 
 2. Total metoden räknar fel på total price  
 
-3. 
+3. Om man lägger till en vara kan den läggas till med en tom sträng 
+
+4. Programmet crashar om man skriver något annat än en int när man lägger till en vara
 ### Fix:
 1. Ändra ReadAllText => ReadAllLines som automatiskt tar bort \r i slutet och skapar inte en extra tom line.   
 Lägger till en if som kollar om det finns en tom line i txt. Om det finns blir den ignorerad.   
 
 2. Fixat genom att ändra int i = 1 till int i = 0   
 
-3. 
+3. Jag fixade bugg 3 och 4 genom att rensa upp sjävla program loopen med metoder    
+Det finns en metod som läser in en sträng som inte är tom och en för int som inte är negativ. Sedan finns det en metod som lägger till en item i listan.    
+
+4. 
 
