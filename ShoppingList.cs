@@ -91,5 +91,9 @@ class ShoppingList
             }
             items.Add(new Item(parts[1], int.Parse(parts[0])));     //To the items list you add a new object item with part[1](name) and parse the part[0] to an int. 
         }
-    }    
+    }
+    public int Count()
+    {
+        return items.Count;
+    }
 }

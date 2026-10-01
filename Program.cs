@@ -1,33 +1,46 @@
 ShoppingList list = new ShoppingList("items.txt");
 list.Load();
-string ReadString(string promt)
+string ReadString(string promt)     //Prints promt and reads a string that is not empty
 {
     Console.WriteLine(promt);
     string temp = Console.ReadLine();
     while (string.IsNullOrEmpty(temp))
     {
-        Console.Clear();
         Console.WriteLine($"Skriv namnet på varan: ");
         temp = Console.ReadLine();
     }
     return temp;
 }
-int ReadNotNegativeInt(string promt)
+int ReadNotNegativeInt(string promt)    //Prints promt and reads and int thats is not negative.
 {
     Console.WriteLine(promt);
     int num;
     while(!int.TryParse(Console.ReadLine(), out num) || num < 0)
     {
-        Console.Clear();
         Console.WriteLine("Skriv ett heltal som inte är negativt");
     }
     return num;
 }
-void AddItem()
+void AddItem()  //Uses the helpers and adds the item to the shopping list.
+
 {
     string name = ReadString("Skriv namnet på varan");
     int price = ReadNotNegativeInt("Skriv priset på varan");
     list.Add(new Item(name, price));
+}
+void RemoveItem()   //Removes an item from the list.
+{
+    int number = ReadNotNegativeInt("Nummer: ");
+    if(number > list.Count() || number == 0)
+    {
+        Console.WriteLine($"Det finns ingen vara på plats {number}");
+        Console.ReadKey();
+    }
+    else
+    {
+        list.RemoveAt(number);
+    }
+    
 }
 while (true)
 {
@@ -50,9 +63,7 @@ while (true)
     }
     else if (choice == 2)
     {
-        Console.Write("Nummer: ");
-        int number = int.Parse(Console.ReadLine());
-        list.RemoveAt(number);
+        RemoveItem();
     }
     else if (choice == 3)
     {
