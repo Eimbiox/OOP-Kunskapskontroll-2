@@ -17,7 +17,9 @@ Man får även en extra \r på slutet som man behöver ta bort
 
 7. Programmet skriver inte ut om varan hittades eller inte när man söker efter den  
 
-8. Programmet crashar om den inte hittar filen (items.txt)
+8. Programmet crashar om den inte hittar filen (items.txt)  
+
+9. Catch under save metoden fångar ingeting
 ### Fix:
 1. Ändra ReadAllText => ReadAllLines som automatiskt tar bort \r i slutet och skapar inte en extra tom line.   
 Lägger till en if som kollar om det finns en tom line i txt. Om det finns blir den ignorerad.   
@@ -40,5 +42,7 @@ Om den är true så går den vidare eftersom !true blir false och kör resten av
 
 Om man sedan sparar listan så skapas det en ny items.txt automatiskt. Detta är eftersom File.WriteAllText kollar om det finns en fil vid det namnet. Om det inte finns så skapar den det automatiskt och skriver i den. 
 
-Om filen finns så rensar den allt i filen och skriver om det.
+Om filen finns så rensar den allt i filen och skriver om det.   
+
+9. Fixat genom att lägga till 2 catch under try i save metoden. Den fångar upp om man inte har access till filen eller om något annat går som tex full hårdisk. Den skriver ut errorsen till användaren
 

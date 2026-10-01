@@ -66,16 +66,20 @@ class ShoppingList
         {
             lines.Add($"{item.Price};{item.Name}"); 
         }
-
         try
         {
             File.WriteAllText(path, string.Join("\r\n", lines) + "\r\n");
+            Console.WriteLine("Listan är sparad.");
         }
-        catch
+        catch (UnauthorizedAccessException e)
         {
-        }   //catch what?
-
-        Console.WriteLine("Listan är sparad.");
+            Console.WriteLine($"No access: {e.Message}");
+            
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine($"Något gick fel: {e.Message}");
+        }  
     }
     // Reads the file back into the list.
     
