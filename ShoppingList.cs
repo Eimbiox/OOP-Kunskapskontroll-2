@@ -64,7 +64,7 @@ class ShoppingList
 
         foreach (Item item in items)
         {
-            lines.Add($"{item.Price};{item.Name}");
+            lines.Add($"{item.Price};{item.Name}"); 
         }
 
         try
@@ -73,21 +73,23 @@ class ShoppingList
         }
         catch
         {
-        }
+        }   //catch what?
 
         Console.WriteLine("Listan är sparad.");
     }
-
     // Reads the file back into the list.
+    
     public void Load()
     {
-        string text = File.ReadAllText(path);
-        string[] lines = text.Split('\n');
-
-        foreach (string line in lines)
+        string[] lines = File.ReadAllLines(path);   //Reads all lines in path, ReadAllLines fixes the issue where \r is left after the split and it does not create and extra empty line
+        foreach (string line in lines)          
         {
-            string[] parts = line.Split(';');
-            items.Add(new Item(parts[1], int.Parse(parts[0])));
+            string[] parts = line.Split(';');   //every line is split on ; so you get part[0] and part[1]
+            if(string.IsNullOrWhiteSpace(parts[0]))     //Here we have an extra saftey measure that incase there is an empty line in txt file it will ignore them.
+            {
+                continue;
+            }
+            items.Add(new Item(parts[1], int.Parse(parts[0])));     //To the items list you add a new object item with part[1](name) and parse the part[0] to an int. 
         }
-    }
+    }    
 }
