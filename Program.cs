@@ -53,27 +53,31 @@ while (true)
     Console.WriteLine("3. Spara");
     Console.WriteLine("4. Sök vara");
     Console.WriteLine("5. Avsluta");
-    Console.Write("Välj: ");
 
-    int choice = int.Parse(Console.ReadLine());
-
-    if (choice == 1)
+    int choice = ReadNotNegativeInt("Välj: ");
+    if(choice > 5)
     {
-        AddItem();
+        Console.WriteLine("Välj en av meny valen");
     }
-    else if (choice == 2)
+    else
     {
-        RemoveItem();
-    }
-    else if (choice == 3)
-    {
-        list.Save();
-    }
-    else if (choice == 4)
-    {
-        Console.Write("Namn att söka efter: ");
-        string wanted = Console.ReadLine();
-        Item found = list.Find(wanted);
+        if (choice == 1)
+        {
+            AddItem();
+        }
+        else if (choice == 2)
+        {
+            RemoveItem();
+        }
+        else if (choice == 3)
+        {
+            list.Save();
+        }
+        else if (choice == 4)
+        {
+            Console.Write("Namn att söka efter: ");
+            string wanted = Console.ReadLine();
+            Item found = list.Find(wanted);
 
         if (found == null)
         {
@@ -83,9 +87,12 @@ while (true)
         {
             Console.WriteLine($"Hittade: {found}");
         }
+        }
+        else if (choice == 5)
+        {
+            break;
+        }
     }
-    else if (choice == 5)
-    {
-        break;
-    }
+    
+    
 }

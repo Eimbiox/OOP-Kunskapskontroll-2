@@ -13,7 +13,9 @@ Man får även en extra \r på slutet som man behöver ta bort
 
 5. Programmet crashar om man väljer ett nummer som inte finns på remove 
 
-6. Programmet crashar om man inte väljer en av dem 5 alternativen i menyn
+6. Programmet crashar om man inte väljer en av dem 5 alternativen i menyn   
+
+7.
 ### Fix:
 1. Ändra ReadAllText => ReadAllLines som automatiskt tar bort \r i slutet och skapar inte en extra tom line.   
 Lägger till en if som kollar om det finns en tom line i txt. Om det finns blir den ignorerad.   
@@ -26,5 +28,7 @@ Lägger till en if som kollar om det finns en tom line i txt. Om det finns blir 
 
 5. Fixat genom att använda helper metoderna och en egen metod för just remove så att man kan bara ta bort om man skriver ett nummer som finns på listan.    
 
-6. 
+6. Fixat genom att lägga en if innan meny valen som kollar att man väljer en av de 5 alternativen.  
+
+7. 
 
