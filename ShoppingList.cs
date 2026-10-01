@@ -3,29 +3,34 @@ class ShoppingList
 {
     private List<Item> items = new List<Item>();
     private string path;
-    private int _buget;
-    public int Buget
+    private int _budget;
+    public int Budget
     {
-        get {return _buget;}
+        get {return _budget;}
         set
         {
             if (value <= 0 || value > 10000)
             {
-                throw new ArgumentOutOfRangeException(nameof(Buget), "Value can not be negative, zero or above 10 000");
+                throw new ArgumentOutOfRangeException(nameof(Budget), "Value can not be negative, zero or above 10 000");
             }
-            _buget = value;
+            _budget = value;
         }
     }
 
     public ShoppingList(string path, int budget)
     {
         this.path = path;
-        this.Buget = budget;
+        this.Budget = budget;
     }
 
-    public void Add(Item item)
+    public bool Add(Item item)  //If item and total price would be more than buget, the item is not added to the list. Otherwise it gets added.
     {
-        items.Add(item);     
+        if (Total() + item.Price > Budget)
+        {
+            return false;
+        }
+        items.Add(item);  
+        return true;   
     }
 
     // Removes the item the user sees as number 1, 2, 3 ...

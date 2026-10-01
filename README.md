@@ -48,3 +48,8 @@ Om filen finns så rensar den allt i filen och skriver om det.
 
 ### Item skyddar sig själv. 
 Jag valde att skriva item skyddet i set på egenskaperna eftersom om man skriver dem i konstruktorn så finns det inget som stoppar item att ändra värden efter objektet redan finns. Med set spelar det ingen roll om item existerar eller inte den kan aldrig få fel värden.
+
+### Budget tak   
+Jag valde att låta add returnera bool istället för try och catch eftersom det bar a känns mer bekvämt. Add lägger inte till en vara om det överstiger taket.    
+I add under program.cs så kollar den om varan kunde läggas till annars skriver den ut felmedellandet.   
+Jag tycker det är logiskt att en user ska själv få välja sin budgettak så jag låter usern skriva in den innan programmet startar. Detta löser jag genom att skapa en lista som är null och kör tills den är inte är null längre. Programmet försöker skapa ett objekt av ShoppingList. Om budgeten överstiger max gränsen(10 000kr) så kan den inte skapa objektet och fångar ett fel.

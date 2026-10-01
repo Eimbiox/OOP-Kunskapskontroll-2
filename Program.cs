@@ -1,4 +1,16 @@
-ShoppingList list = new ShoppingList("items.txt");
+ShoppingList list = null;
+while (list == null)
+{
+    int budget = ReadNotNegativeInt("Skriv in ditt buget(Max 10 000kr): ");
+    try
+    {
+        list = new ShoppingList("Items.txt", budget);
+    }
+    catch (ArgumentOutOfRangeException e)
+    {
+        Console.WriteLine($"Ogiltigt bugettak: {e.Message}");
+    }
+}
 list.Load();
 
 string ReadString(string promt)     //Prints promt and reads a string that is not empty
@@ -25,21 +37,27 @@ int ReadNotNegativeInt(string promt)    //Prints promt and reads and int thats i
 }
 
 void AddItem()  //Uses the helpers and adds the item to the shopping list.
-
 {
     string name = ReadString("Skriv namnet på varan");
     int price = ReadNotNegativeInt("Skriv priset på varan");
     try
     {
-        list.Add(new Item(name, price));
+        bool added = list.Add(new Item(name, price));   //Save the result in a bool. It does not get added to the list. See ShoppingList Add() logic.
+        if (!added)
+        {
+            Console.WriteLine("Varan kunde inte läggas till eftersom det överstiger bugeten");
+            Console.ReadKey();
+        }
     }
     catch (ArgumentOutOfRangeException e)
     {
         Console.WriteLine("FEL" + e.Message);
+        Console.ReadKey();
     }
     catch (ArgumentException e)
     {
         Console.WriteLine("FEL" + e.Message);
+        Console.ReadKey();
     }
 }
 
