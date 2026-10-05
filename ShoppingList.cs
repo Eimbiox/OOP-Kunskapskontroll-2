@@ -2,11 +2,12 @@
 class ShoppingList
 {
     private List<Item> items = new List<Item>();
+    public List<string> Errors { get; private set; } = [];
     private string path;
     private int _budget;
     public int Budget
     {
-        get {return _budget;}
+        get { return _budget; }
         set
         {
             if (value <= 0 || value > 10000)
@@ -16,21 +17,21 @@ class ShoppingList
             _budget = value;
         }
     }
-    
+
     public ShoppingList(string path, int budget)
     {
         this.path = path;
         this.Budget = budget;
     }
 
-    public bool Add(Item item)  //If item and total price would be more than buget, the item is not added to the list. Otherwise it gets added.
+    public bool Add(Item item)  //If item and total price would be more than budget, the item is not added to the list. Otherwise it gets added.
     {
         if (Total() + item.Price > Budget)
         {
             return false;
         }
-        items.Add(item);  
-        return true;   
+        items.Add(item);
+        return true;
     }
 
     // Removes the item the user sees as number 1, 2, 3 ...
@@ -83,7 +84,7 @@ class ShoppingList
 
         foreach (Item item in items)
         {
-            lines.Add($"{item.Price};{item.Name}"); 
+            lines.Add($"{item.Price};{item.Name}");
         }
         try
         {
@@ -93,30 +94,51 @@ class ShoppingList
         catch (UnauthorizedAccessException e)
         {
             Console.WriteLine($"No access: {e.Message}");
-            
+
         }
         catch (IOException e)
         {
             Console.WriteLine($"Något gick fel: {e.Message}");
-        }  
+        }
     }
     // Reads the file back into the list.
-    
+
     public void Load()
     {
         if (!File.Exists(path))     //Checks if the file of the path(items.txt) exits. If not the program continues to run. (Save creates the missing file)
         {
             return;
         }
-        string[] lines = File.ReadAllLines(path);   //Reads all lines in path, ReadAllLines fixes the issue where \r is left after the split and it does not create and extra empty line
-        foreach (string line in lines)          
+        string[] lines = File.ReadAllLines(path);
+        foreach (string line in lines)
         {
-            string[] parts = line.Split(';');   //every line is split on ; so you get part[0] and part[1]
-            if(string.IsNullOrWhiteSpace(parts[0]))     //Here we have an extra saftey measure that incase there is an empty line in txt file it will ignore them.
+            string[] parts = line.Split(';');
+            if (parts.Length == 2)
             {
-                continue;
+                string text = parts[1];
+                bool success = int.TryParse(parts[0], out int price);
+                if (success)
+                {
+                    try
+                    {
+                        items.Add(new Item(text, price));
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Errors.Add($"Varan \"{line}\" kunde inte läggas till menyn: {ex.Message}");
+                    }
+
+                }
+                else
+                {
+                    Errors.Add($"Raden \"{line}\" i filen är trasig, den läggs inte till");
+                }
             }
-            items.Add(new Item(parts[1], int.Parse(parts[0])));     //To the items list you add a new object item with part[1](name) and parse the part[0] to an int. 
+            else
+            {
+                Errors.Add($"Raden \"{line}\" i filen är trasig, den läggs inte till");
+            }
+
         }
     }
     public int Count()  //Returns the ammount of items in the list. 
