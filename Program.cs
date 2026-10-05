@@ -4,7 +4,7 @@ while (list == null)    //Checks if the object could be created and goes on unti
     int budget = ReadNotNegativeInt("Skriv in ditt buget(Max 10 000kr): ");
     try
     {
-        list = new ShoppingList("Items.txt", budget);
+        list = new ShoppingList("items.txt", budget);
     }
     catch (ArgumentOutOfRangeException e)
     {
@@ -22,7 +22,7 @@ string ReadString(string promt)     //Prints promt and reads a string that is no
 {
     Console.WriteLine(promt);
     string temp = Console.ReadLine();
-    while (string.IsNullOrEmpty(temp))
+    while (string.IsNullOrWhiteSpace(temp))
     {
         Console.WriteLine($"Skriv namnet på varan: ");
         temp = Console.ReadLine();

@@ -116,7 +116,7 @@ class ShoppingList
             {
                 continue;
             }
-            string[] parts = line.Split(';');
+            string[] parts = line.Split(';', 2);
             if (parts.Length == 2)
             {
                 string text = parts[1];

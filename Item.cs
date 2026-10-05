@@ -7,9 +7,9 @@ class Item
         get {return _name;}
         set
         {
-            if (string.IsNullOrEmpty(value))
+            if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Value can not be null");
+                throw new ArgumentException("Value can not be empty");
             }
             _name = value;
         }

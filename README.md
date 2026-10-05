@@ -22,7 +22,7 @@
 
 **Problem:** Om man lägger till en vara kan den läggas till med en tom sträng.
 
-**Fix:** Fixat genom att använda metoder som kollar att string inte är empty. 
+**Fix:** Fixat genom att använda metoder som kollar att string inte är empty. Namn med bara spaces är fixat med `IsNullOrWhiteSpace`. 
 
 ---
 
@@ -86,7 +86,15 @@ Om filen finns så rensar den allt i filen och skriver om det.
 
 **Varför:** Den gamla `Load()` litade på att varje rad alltid såg ut som `pris;namn`. `parts[1]` finns inte om raden saknar `;`. `int.Parse` kastar `FormatException` om priset inte är ett tal. `new Item(...)` kastar ett undantag om priset är negativt eller namnet är tomt, eftersom `Item` skyddar sig själv.
 
-**Fix:** Fixat genom att lägga till extra felhantering i metoden `Load()`, metoden kollar så att alla `parts` har 2 delar och nu sparar vi varje part i en variabel. `Part[0]` är en `TryParse` nu som kollar om det faktiskt va en `int` som fanns där i txt filen. Baserat på det så försöker den att lägga till en ny item i listan. Om talet tex är `-5` vilket items egna felhantering inte tillåter så kommer den fånga ett fel. Vi kollar alltid att `parts[0]` är en siffra så det är omöjligt att ladda in en fil som är tex `Mjölk;Mjölk`. Alla errors läggs till i en lista som `Program.cs` sedan skriver ut. Där finns ett vilkor som kollar om error listan är tom eller inte. Om den är tom så skippas errors att printa helt o hållet.
+**Fix:** Fixat genom att lägga till extra felhantering i metoden `Load()`, metoden kollar så att alla `parts` har 2 delar och nu sparar vi varje part i en variabel. `Part[0]` är en `TryParse` nu som kollar om det faktiskt va en `int` som fanns där i txt filen. Baserat på det så försöker den att lägga till en ny item i listan. Om talet tex är `-5` vilket items egna felhantering inte tillåter så kommer den fånga ett fel. Vi kollar alltid att `parts[0]` är en siffra så det är omöjligt att ladda in en fil som är tex `Mjölk;Mjölk`. Alla errors läggs till i en lista som `Program.cs` sedan skriver ut. Där finns ett vilkor som kollar om error listan är tom eller inte. Om den är tom så skippas errors att printa helt o hållet.  
+
+---
+
+### Bugg 11: Namn med `;` försvann efter sparning
+
+**Problem:** Om man lade till en vara med `;` i namnet, tex `Bröd;fullkorn`, sparades den som `10;Bröd;fullkorn`. Vid inläsning blev raden 3 delar och räknades som trasig, så varan försvann.
+
+**Fix:** Ändrade `line.Split(';')` till `line.Split(';', 2)` i `Load()`. Den låter spliten bara hända 1 gång vid `;` så `10;Bröd;fullkorn` blir `10` och `Bröd;fullkorn`.
 
 ---
 
@@ -113,7 +121,7 @@ komma under taket igen.
 
 Jag tycker det är logiskt att en user ska själv få välja sin budgettak så jag låter usern skriva in den innan programmet startar. Detta löser jag genom att skapa en lista som är `null` och kör tills den är inte är `null` längre. Programmet försöker skapa ett objekt av `ShoppingList`. Om budgeten överstiger max gränsen (10 000kr) så kan den inte skapa objektet och fångar ett fel.
 
----
+--- 
 
 ## Klassdiagram
 
