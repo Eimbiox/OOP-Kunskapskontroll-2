@@ -112,6 +112,10 @@ class ShoppingList
         string[] lines = File.ReadAllLines(path);
         foreach (string line in lines)
         {
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                continue;
+            }
             string[] parts = line.Split(';');
             if (parts.Length == 2)
             {

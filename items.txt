@@ -2,3 +2,5 @@ hej
 abc;Mjölk
 -5;Mjölk
 5;
+15;Mjölk
+100;Ost
