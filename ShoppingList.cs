@@ -16,7 +16,7 @@ class ShoppingList
             _budget = value;
         }
     }
-
+    
     public ShoppingList(string path, int budget)
     {
         this.path = path;

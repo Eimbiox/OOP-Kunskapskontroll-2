@@ -1,5 +1,5 @@
 ShoppingList list = null;
-while (list == null)
+while (list == null)    //Checks if the object could be created and goes on until it is
 {
     int budget = ReadNotNegativeInt("Skriv in ditt buget(Max 10 000kr): ");
     try
@@ -135,6 +135,4 @@ while (true)
             break;
         }
     }
-    
-    
 }

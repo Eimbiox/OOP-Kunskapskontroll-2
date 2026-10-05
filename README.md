@@ -53,3 +53,55 @@ Jag valde att skriva item skyddet i set på egenskaperna eftersom om man skriver
 Jag valde att låta add returnera bool istället för try och catch eftersom det bar a känns mer bekvämt. Add lägger inte till en vara om det överstiger taket.    
 I add under program.cs så kollar den om varan kunde läggas till annars skriver den ut felmedellandet.   
 Jag tycker det är logiskt att en user ska själv få välja sin budgettak så jag låter usern skriva in den innan programmet startar. Detta löser jag genom att skapa en lista som är null och kör tills den är inte är null längre. Programmet försöker skapa ett objekt av ShoppingList. Om budgeten överstiger max gränsen(10 000kr) så kan den inte skapa objektet och fångar ett fel.
+
+### Klassdiagram    
+
+```
+┌──────────────────────────────┐
+│ Item                         │
+├──────────────────────────────┤
+│ - _name: string              │
+│ - _price: int                │
+│ + Name: string               │
+│ + Price: int                 │
+├──────────────────────────────┤
+│ + Item(name, price)          │
+│ + ToString(): string         │
+└──────────────────────────────┘
+               ▲
+               │ 
+               │
+┌──────────────────────────────┐
+│ ShoppingList                 │
+├──────────────────────────────┤
+│ - items: List<Item>          │
+│ - path: string               │
+│ - _buget: int                │
+│ + Buget: int                 │
+├──────────────────────────────┤
+│ + ShoppingList(path, budget) │
+│ + Add(item): bool            │
+│ + RemoveAt(number): void     │
+│ + Total(): int               │
+│ + Find(name): Item           │
+│ + Print(): void              │
+│ + Save(): void               │
+│ + Load(): void               │
+│ + Count(): int               │
+└──────────────────────────────┘
+               ▲
+               │ 
+               │
+┌──────────────────────────────┐
+│ Program                      │
+├──────────────────────────────┤
+│ - list: ShoppingList         │
+├──────────────────────────────┤
+│ - ReadString(prompt): string │
+│ - ReadNotNegativeInt(prompt) │
+│ - AddItem(): void            │
+│ - RemoveItem(): void         │
+│ - SearchItem(): void         │
+└──────────────────────────────┘
+
+```
