@@ -125,7 +125,7 @@ Jag tycker det är logiskt att en user ska själv få välja sin budgettak så j
 
 ## Klassdiagram
 
-```
+```C#
 ┌──────────────────────────────┐
 │ Item                         │
 ├──────────────────────────────┤
