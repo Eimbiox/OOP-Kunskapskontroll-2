@@ -8,13 +8,17 @@ while (list == null)    //Checks if the object could be created and goes on unti
     }
     catch (ArgumentOutOfRangeException e)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine($"Ogiltigt bugettak: {e.Message}");
+        Console.ResetColor();
     }
 }
 list.Load();
 if (list.Errors.Count > 0)
 {
+    Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine(string.Join("\n", list.Errors));
+    Console.ResetColor();
     Console.ReadKey();
 }
 
@@ -36,7 +40,9 @@ int ReadNotNegativeInt(string promt)    //Prints promt and reads and int thats i
     int num;
     while (!int.TryParse(Console.ReadLine(), out num) || num < 0)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Skriv ett heltal som inte är negativt");
+        Console.ResetColor();
     }
     return num;
 }
@@ -50,18 +56,24 @@ void AddItem()  //Uses the helpers and adds the item to the shopping list.
         bool added = list.Add(new Item(name, price));   //Save the result in a bool. It does not get added to the list. See ShoppingList Add() logic.
         if (!added)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Varan kunde inte läggas till eftersom det överstiger budgeten");
+            Console.ResetColor();
             Console.ReadKey();
         }
     }
     catch (ArgumentOutOfRangeException e)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("FEL" + e.Message);
+        Console.ResetColor();
         Console.ReadKey();
     }
     catch (ArgumentException e)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("FEL" + e.Message);
+        Console.ResetColor();
         Console.ReadKey();
     }
 }
@@ -71,7 +83,9 @@ void RemoveItem()   //Removes an item from the list.
     int number = ReadNotNegativeInt("Nummer: ");
     if (number > list.Count() || number == 0)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine($"Det finns ingen vara på plats {number}");
+        Console.ResetColor();
         Console.ReadKey();
     }
     else
@@ -88,7 +102,9 @@ void SearchItem()   //Searches for an item in the list.
 
     if (found == null)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Varan finns inte i listan.");
+        Console.ResetColor();
         Console.ReadKey();
     }
     else
@@ -101,6 +117,7 @@ void SearchItem()   //Searches for an item in the list.
 
 while (true)
 {
+    Console.ResetColor();
     Console.Clear();
     Console.WriteLine();
     list.Print();
@@ -114,7 +131,9 @@ while (true)
     int choice = ReadNotNegativeInt("Välj: ");
     if (choice > 5 || choice == 0)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Välj en av meny valen");
+        Console.ResetColor();
         Console.ReadKey();
     }
     else

@@ -74,7 +74,7 @@ class ShoppingList
             Console.WriteLine($"{i + 1}. {items[i]}");
         }
 
-        Console.WriteLine($"Totalt: {Total()} kr");
+        Console.WriteLine($"Budget kvar: {_budget - Total()} Totalt: {Total()} kr");
     }
 
     // Writes one item per line, as "price;name".
@@ -93,12 +93,16 @@ class ShoppingList
         }
         catch (UnauthorizedAccessException e)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"No access: {e.Message}");
+            Console.ResetColor();
 
         }
         catch (IOException e)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Något gick fel: {e.Message}");
+            Console.ResetColor();
         }
     }
     // Reads the file back into the list.
