@@ -125,52 +125,46 @@ Jag tycker det är logiskt att en user ska själv få välja sin budgettak så j
 
 ## Klassdiagram
 
-```C#
-┌──────────────────────────────┐
-│ Item                         │
-├──────────────────────────────┤
-│ - _name: string              │
-│ - _price: int                │
-│ + Name: string               │
-│ + Price: int                 │
-├──────────────────────────────┤
-│ + Item(name, price)          │
-│ + ToString(): string         │
-└──────────────────────────────┘
-               ▲
-               │ 
-               │
-┌──────────────────────────────┐
-│ ShoppingList                 │
-├──────────────────────────────┤
-│ - items: List<Item>          │
-│ - path: string               │
-│ - _budget: int               │
-│ + Budget: int                │
-│ + Errors: List<string>       │
-├──────────────────────────────┤
-│ + ShoppingList(path, budget) │
-│ + Add(item): bool            │
-│ + RemoveAt(number): void     │
-│ + Total(): int               │
-│ + Find(name): Item           │
-│ + Print(): void              │
-│ + Save(): void               │
-│ + Load(): void               │
-│ + Count(): int               │
-└──────────────────────────────┘
-               ▲
-               │ 
-               │
-┌──────────────────────────────┐
-│ Program                      │
-├──────────────────────────────┤
-│ - list: ShoppingList         │
-├──────────────────────────────┤
-│ - ReadString(prompt): string │
-│ - ReadNotNegativeInt(prompt) │
-│ - AddItem(): void            │
-│ - RemoveItem(): void         │
-│ - SearchItem(): void         │
-└──────────────────────────────┘
+```mermaid
+classDiagram
+    direction TB
+
+    class Item {
+        -string _name
+        -int _price
+        +string Name
+        +int Price
+        +Item(string name, int price)
+        +ToString() string
+    }
+
+    class ShoppingList {
+        -List~Item~ items
+        -string path
+        -int _budget
+        +int Budget
+        +List~string~ Errors
+        +ShoppingList(string path, int budget)
+        +Add(Item item) bool
+        +RemoveAt(int number) void
+        +Total() int
+        +Find(string name) Item
+        +Print() void
+        +Save() void
+        +Load() void
+        +Count() int
+    }
+
+    class Program {
+        <<top-level statements>>
+        -ShoppingList list
+        -ReadString(string prompt) string
+        -ReadNotNegativeInt(string prompt) int
+        -AddItem() void
+        -RemoveItem() void
+        -SearchItem() void
+    }
+
+    Program --> ShoppingList : använder
+    ShoppingList --> Item : innehåller
 ```
