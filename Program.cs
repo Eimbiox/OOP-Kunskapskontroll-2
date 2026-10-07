@@ -38,11 +38,24 @@ int ReadNotNegativeInt(string promt)    //Prints promt and reads and int thats i
 {
     Console.WriteLine(promt);
     int num;
+    int tries = 0;
     while (!int.TryParse(Console.ReadLine(), out num) || num < 0)
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("Skriv ett heltal som inte är negativt");
-        Console.ResetColor();
+
+        if (tries < 2)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Skriv ett heltal som inte är negativt");
+            Console.ResetColor();
+            tries++;
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("SKRIV ETT HELTAL SOM INTE ÄR NEGATIVT!");
+            Console.ResetColor();
+            tries++;
+        }
     }
     return num;
 }
