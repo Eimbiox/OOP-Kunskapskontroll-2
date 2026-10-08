@@ -58,7 +58,7 @@ class ShoppingList
     {
         foreach (Item item in items)
         {
-            if (item.Name == name)
+            if (item.Name.ToUpper() == name.ToUpper())
             {
                 return item;
             }
