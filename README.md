@@ -28,7 +28,7 @@
 
 ### Bugg 4: Krasch vid fel typ av pris
 
-**Problem:** Programmet crashar om man skriver något annat än en `int` när man lägger till en vara.
+**Problem:** Programmet kraschar om man skriver något annat än en `int` när man lägger till en vara.
 
 **Fix:** Fixat genom att använda metoder som kollar att det är en `int` och inte är negativt.
 
@@ -36,7 +36,7 @@
 
 ### Bugg 5: Krasch vid borttagning av vara som inte finns
 
-**Problem:** Programmet crashar om man väljer ett nummer som inte finns på remove.
+**Problem:** Programmet kraschar om man väljer ett nummer som inte finns på remove.
 
 **Fix:** Fixat genom att använda helper metoderna och en egen metod för just remove så att man kan bara ta bort om man skriver ett nummer som finns på listan.
 
@@ -44,7 +44,7 @@
 
 ### Bugg 6: Krasch vid ogiltigt menyval
 
-**Problem:** Programmet crashar om man inte väljer en av dem 5 alternativen i menyn.
+**Problem:** Programmet kraschar om man inte väljer en av dem 5 alternativen i menyn.
 
 **Fix:** Fixat genom att lägga en `if` innan meny valen som kollar att man väljer en av de 5 alternativen.
 
@@ -60,7 +60,7 @@
 
 ### Bugg 8: Krasch om filen saknas
 
-**Problem:** Programmet crashar om den inte hittar filen (`items.txt`).
+**Problem:** Programmet kraschar om den inte hittar filen (`items.txt`).
 
 **Fix:** Fixat genom att lägga till `File.Exists(path)` i `Load`. Den kollar om det finns en fil vid det namnet i `path` och returnerar en boolean.
 
