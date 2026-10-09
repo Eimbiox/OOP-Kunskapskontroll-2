@@ -52,7 +52,7 @@
 
 ### Bugg 7: Sökresultatet syns inte
 
-**Problem:** Programmet skriver inte ut om varan hittades eller inte när man söker efter den.
+**Problem:** Programmet skriver ut varan den hittade men användaren hinner inte se den.
 
 **Fix:** Fixat genom att lägga till `Console.ReadKey()` efter utskriften.
 
