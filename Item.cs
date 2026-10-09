@@ -11,6 +11,10 @@ class Item
             {
                 throw new ArgumentException("Value can not be empty");
             }
+            if (value.Count() > 20)
+            {
+                throw new ArgumentException("Value can not be longer then 20 characters");
+            }
             _name = value;
         }
     }

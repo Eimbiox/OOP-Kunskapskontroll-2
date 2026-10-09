@@ -78,14 +78,14 @@ void AddItem()  //Uses the helpers and adds the item to the shopping list.
     catch (ArgumentOutOfRangeException e)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("FEL" + e.Message);
+        Console.WriteLine("FEL " + e.Message);
         Console.ResetColor();
         Console.ReadKey();
     }
     catch (ArgumentException e)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("FEL" + e.Message);
+        Console.WriteLine("FEL " + e.Message);
         Console.ResetColor();
         Console.ReadKey();
     }

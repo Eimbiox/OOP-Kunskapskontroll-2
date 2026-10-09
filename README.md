@@ -100,7 +100,7 @@ Om filen finns så rensar den allt i filen och skriver om det.
 
 ## Item skyddar sig själv
 
-Jag valde att skriva item skyddet i `set` på egenskaperna eftersom om man skriver dem i konstruktorn så finns det inget som stoppar item att ändra värden efter objektet redan finns. Med `set` spelar det ingen roll om item existerar eller inte den kan aldrig få fel värden.
+Jag valde att skriva item skyddet i `set` på egenskaperna eftersom om man skriver dem i konstruktorn så finns det inget som stoppar item att ändra värden efter objektet redan finns. Med `set` spelar det ingen roll om item existerar eller inte den kan aldrig få fel värden. Den skyddar mot felaktiga namn som är tomma, bara mellanslag, längre än 20 tecken och priser som är negativa. 
 
 ---
 
